@@ -1,0 +1,41 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2725
+
+This plugin creates commands for converting from and to Russian translit using utf-8 encoding. For example, to write "Чебурашка", write "Cheburashka" or "CHeburashka", select the word and execute command ":Torus v" .
+
+Similar plugins:
+http://www.vim.org/scripts/script.php?script_id=2401
+http://www.vim.org/scripts/script.php?script_id=2469
+
+USAGE
+=====
+This plugin creates two commands: Torussian and Fromrussian.
+
+:[range]Torussian [v]
+    convert from translit (latin alphabet) to Russian (utf-8)
+
+:[range]Fromrussian [v]
+    convert from Russian (utf-8) to translit
+
+These can be used as follows (commands can be abbreviated):
+
+:Torus
+    Convert current line.
+
+:'<,'>Torus
+    Convert lines in Visual range. Any other range can be specified, for example :%Torus will convert entire buffer.
+
+:Torus v
+:'<,'>Torus v
+    Convert text in Visual area. If a range is specified, it is ignored.
+
+CUSTOMIZING
+===========
+If you don't like my transliteration version, edit s:table_ru.
+
+It is easy to add converters for other alphabets. First, create conversion table:
+    let s:table_greek = [ ..... ]
+
+And then add new commands:
+    com! -range -nargs=? Togreek   call s:Translit_Converter(<line1>,<line2>, 'table_greek', 0,1, <q-args>)
+    com! -range -nargs=? Fromgreek call s:Translit_Converter(<line1>,<line2>, 'table_greek', 1,0, <q-args>)
+
