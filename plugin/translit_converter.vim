@@ -2,7 +2,7 @@
 " plugin for Vim version 7.0 and above
 " Home: http://www.vim.org/scripts/script.php?script_id=2725
 " Author: Vlad Irnov  (vlad DOT irnov AT gmail DOT com)
-" Version: 1.01, 2009-08-14
+" Version: 1.1, 2009-12-24
 " this file is in utf-8 encoding
 "
 "--- docs ---{{{1
@@ -61,11 +61,6 @@
 "   ~/.vim/plugin/  or  $HOME\vimfiles\plugin\
 
 
-"--- set cpo ---{{{1
-let s:cpo_save = &cpo
-set cpo&vim
-
-
 "--- Quickload ---{{{1
 if !exists('s:translit_converter_did_load')
     let s:translit_converter_did_load = 1
@@ -74,8 +69,10 @@ if !exists('s:translit_converter_did_load')
     exe "au FuncUndefined *Translit_Converter source " . expand("<sfile>:p")
     finish
 endif
-au! FuncUndefined *Translit_Converter
 
+au! FuncUndefined *Translit_Converter
+let s:cpo_save = &cpo
+set cpo&vim
 
 "--- s:table_ru ---{{{1
 " This table is slightly different from usual translit versions. It is designed
